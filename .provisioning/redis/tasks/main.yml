@@ -1,0 +1,14 @@
+---
+- name: Installing Redis
+  apt:
+    name: redis
+
+- name: Listening to every ip in Redis
+  lineinfile:
+    dest: /etc/redis/redis.conf
+    state: present
+    regexp: "bind 127.0.0.1 ::1"
+    line: "bind 0.0.0.0 ::1"
+
+- name: Start Redis
+  service: name=redis-server state=restarted enabled=yes

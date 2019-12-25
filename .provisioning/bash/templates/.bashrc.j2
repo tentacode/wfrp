@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# History configuration
+# @see https://unix.stackexchange.com/a/18443/280105
+# Avoid duplicates and allow common history betweend shell
+HISTSIZE=5000 # increase history size
+HISTCONTROL=ignoredups:erasedups
+shopt -s histappend
+PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+
+# aliases
+alias histogrep='history | grep'
+
+# ~/bin contains this repository custom scripts to the path
+PATH=$PATH:~/bin:~/.composer/vendor/bin
+
+# useful for accessing any project directory from anywhere using cd
+WORKSPACE_DIRECTORY="/vagrant"
+CDPATH=$CDPATH:$WORKSPACE_DIRECTORY
+
+# prompt
+source refresh_prompt

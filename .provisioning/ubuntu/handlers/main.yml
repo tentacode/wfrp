@@ -1,0 +1,4 @@
+---
+- name: Regenerate locale
+  command: locale-gen
+  listen: "generate locale"

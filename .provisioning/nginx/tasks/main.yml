@@ -1,0 +1,19 @@
+---
+- name: Install nginx
+  package: name=nginx state=present
+
+- name: Remove sites configurations
+  file: state=absent path=/etc/nginx/sites-enabled
+
+- name: Copy sites-enabled
+  copy:
+    src: sites-enabled
+    dest: /etc/nginx
+    force: true
+  notify: restart web services
+
+- name: Copy nginx.conf
+  copy:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+  notify: restart web services
