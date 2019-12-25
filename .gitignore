@@ -14,7 +14,10 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
-
+    
+bin/*
+!bin/console
+!bin/phpunit
 .vagrant
 vagrant-config.yml
 *VBoxSVC*.log

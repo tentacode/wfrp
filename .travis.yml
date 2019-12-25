@@ -1,0 +1,15 @@
+language: php
+php:
+  - 7.4
+
+cache:
+  yarn: true
+  directories:
+    - $HOME/.composer/cache/files
+
+install:
+  - composer install -o
+
+script:
+  - make stan
+  - make spec
