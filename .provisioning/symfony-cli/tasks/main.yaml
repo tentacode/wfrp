@@ -1,0 +1,20 @@
+---
+- name: Check for existing Symfony CLI
+  stat:
+    path: '~/.symfony/bin/symfony'
+  register: symfony_install
+  changed_when: False
+  become_user: vagrant
+
+- block:
+    - name: Install Symfony CLI
+      shell: wget https://get.symfony.com/cli/installer -O - | bash
+  when: not symfony_install.stat.exists
+  become_user: vagrant
+
+- name: Add Symfony CLI bin to PATH
+  copy:
+    dest: /etc/profile.d/symfony.sh
+    mode: 0644
+    content: |
+      PATH="$HOME/.symfony/bin:$PATH"

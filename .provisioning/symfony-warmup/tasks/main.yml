@@ -1,0 +1,7 @@
+---
+- name: Installing php dependencies
+  shell: composer install
+  args:
+    chdir: /vagrant
+  changed_when: false
+  become_user: vagrant

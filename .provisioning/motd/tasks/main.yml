@@ -1,0 +1,14 @@
+---
+- name: Setting Motd
+  template:
+    src: motd.j2
+    dest: /etc/motd
+
+- name: Grabbing motd content
+  shell: cat /etc/motd
+  register: hello
+  failed_when: false
+
+- name: Hello
+  debug:
+    msg: "{{ hello.stdout }}"

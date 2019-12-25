@@ -1,0 +1,32 @@
+---
+- name: Installing aptitude
+  package: name=aptitude
+
+- name: Various utility packages
+  apt:
+    name:
+      - git
+      - htop
+      - unzip
+
+- name: Enable fr locale
+  lineinfile:
+    dest: /etc/locale.gen
+    state: present
+    regexp: "^# fr_FR.UTF-8 UTF-8"
+    line: "fr_FR.UTF-8 UTF-8"
+  notify: generate locale
+
+- name: Disable dynamic motd
+  file:
+    path: /etc/update-motd.d
+    state: directory
+    recurse: yes
+    mode: -x
+
+- name: Disable ubuntu last log
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    state: present
+    regexp: "PrintLastLog yes"
+    line: "PrintLastLog no"

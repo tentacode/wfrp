@@ -1,0 +1,19 @@
+---
+- name: Copying .bashrc file
+  template:
+    src: .bashrc.j2
+    dest: /home/vagrant/.bashrc
+  become_user: vagrant
+
+- name: Copying .profile file
+  template:
+    src: .profile.j2
+    dest: /home/vagrant/.profile
+  become_user: vagrant
+
+- name: Copying bash scripts to ~/bin
+  copy:
+    src: bin
+    dest: /home/vagrant
+    mode: u+x,g+x,o+x
+  become_user: vagrant

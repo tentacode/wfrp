@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  gather_facts: no
+
+  # installing python
+  pre_tasks:
+    - raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+    - setup:
+
+  roles:
+    - ubuntu
+    - python
+    - node
+    - bash
+    - php-fpm
+    - nginx
+    - yarn
+    - postgresql
+    - redis
+    - symfony-cli
